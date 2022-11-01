@@ -20,18 +20,127 @@ function insertName() {
 insertName(); //run the function
 
 function readQuote() {
-    db.collection("quotes").doc("Tuesday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
-      .onSnapshot(tuesdayDoc => {                                                               //arrow notation
-           console.log("current document data: " + tuesdayDoc.data());                          //.data() returns data object
-           document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
-           
-           //Here are other ways to access key:value data fields
-           //$('#quote-goes-here').text(tuesdayDoc.data().quote);                                       //using jquery object dot notation
-           //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);                                    //using json object indexing
-      })
+    const date = new Date();
+    const today = date.getDay();
+
+    switch (today) {
+        case 0:
+            db.collection("quotes").doc("Sunday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+            .onSnapshot(dayDoc => {                                                               //arrow notation
+                console.log("current document data: " + dayDoc.data());                          //.data() returns data object
+                document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
+                
+                //Here are other ways to access key:value data fields
+                //$('#quote-goes-here').text(tuesdayDoc.data().quote);                                       //using jquery object dot notation
+                //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);                                    //using json object indexing
+            })
+            break;
+        case 1:
+            db.collection("quotes").doc("Tuesday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+            .onSnapshot(tuesdayDoc => {                                                               //arrow notation
+                console.log("current document data: " + tuesdayDoc.data());                          //.data() returns data object
+                document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
+                
+                //Here are other ways to access key:value data fields
+                //$('#quote-goes-here').text(tuesdayDoc.data().quote);                                       //using jquery object dot notation
+                //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);                                    //using json object indexing
+            })
+            break;
+        case 2:
+            db.collection("quotes").doc("Tuesday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+            .onSnapshot(tuesdayDoc => {                                                               //arrow notation
+                console.log("current document data: " + tuesdayDoc.data());                          //.data() returns data object
+                document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
+                
+                //Here are other ways to access key:value data fields
+                //$('#quote-goes-here').text(tuesdayDoc.data().quote);                                       //using jquery object dot notation
+                //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);                                    //using json object indexing
+            })
+            break;
+        case 3:
+            db.collection("quotes").doc("Wednesday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+            .onSnapshot(tuesdayDoc => {                                                               //arrow notation
+                console.log("current document data: " + tuesdayDoc.data());                          //.data() returns data object
+                document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
+                
+                //Here are other ways to access key:value data fields
+                //$('#quote-goes-here').text(tuesdayDoc.data().quote);                                       //using jquery object dot notation
+                //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);                                    //using json object indexing
+            })
+            break;
+        case 4:
+            db.collection("quotes").doc("Thursday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+            .onSnapshot(tuesdayDoc => {                                                               //arrow notation
+                console.log("current document data: " + tuesdayDoc.data());                          //.data() returns data object
+                document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
+                
+                //Here are other ways to access key:value data fields
+                //$('#quote-goes-here').text(tuesdayDoc.data().quote);                                       //using jquery object dot notation
+                //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);                                    //using json object indexing
+            })
+            break;
+        case 5:
+            db.collection("quotes").doc("Friday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+            .onSnapshot(tuesdayDoc => {                                                               //arrow notation
+                console.log("current document data: " + tuesdayDoc.data());                          //.data() returns data object
+                document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
+                
+                //Here are other ways to access key:value data fields
+                //$('#quote-goes-here').text(tuesdayDoc.data().quote);                                       //using jquery object dot notation
+                //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);                                    //using json object indexing
+            })
+            break;
+        case 6:
+            db.collection("quotes").doc("Saturday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+            .onSnapshot(tuesdayDoc => {                                                               //arrow notation
+                console.log("current document data: " + tuesdayDoc.data());                          //.data() returns data object
+                document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
+                
+                //Here are other ways to access key:value data fields
+                //$('#quote-goes-here').text(tuesdayDoc.data().quote);                                       //using jquery object dot notation
+                //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);                                    //using json object indexing
+            })
+            break;
+        default:
+            console.log("current document data: None Available");                          //.data() returns data object
+            document.getElementById("quote-goes-here").innerHTML = "Sorry, no daily quotes available!";
+            break; 
+    }
+    
 }
 readQuote();        //calling the function
 
+function displayCards(collection) {
+    let cardTemplate = document.getElementById("hikeCardTemplate");
+
+    db.collection(collection).get()
+        .then(snap => {
+            //var i = 1;  //if you want to use commented out section
+            snap.forEach(doc => { //iterate thru each doc
+                var title = doc.data().name;        // get value of the "name" key
+                var details = doc.data().details;   // get value of the "details" key
+								var hikeID = doc.data().code;    //get unique ID to each hike to be used for fetching right image
+                let newcard = cardTemplate.content.cloneNode(true);
+
+                //update title and text and image
+                newcard.querySelector('.card-title').innerHTML = title;
+                newcard.querySelector('.card-text').innerHTML = details;
+                newcard.querySelector('.card-image').src = `./images/${hikeID}.jpg`; //Example: NV01.jpg
+
+                //give unique ids to all elements for future use
+                // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
+                // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
+                // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
+
+                //attach to gallery
+                document.getElementById(collection + "-go-here").appendChild(newcard);
+                //i++;   //if you want to use commented out section
+            })
+        })
+}
+displayCards("hikes");
+
+// Run in Console ONCE
 function writeHikes() {
     //define a variable for the collection you want to create in Firestore to populate data
     var hikesRef = db.collection("hikes");
@@ -67,4 +176,3 @@ function writeHikes() {
         last_updated: firebase.firestore.Timestamp.fromDate(new Date("March 10, 2022"))
    });
 }
-writeHikes();

@@ -36,7 +36,7 @@ function readQuote() {
             })
             break;
         case 1:
-            db.collection("quotes").doc("Tuesday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+            db.collection("quotes").doc("Monday")                                                      //name of the collection and documents should matach excatly with what you have in Firestore
             .onSnapshot(tuesdayDoc => {                                                               //arrow notation
                 console.log("current document data: " + tuesdayDoc.data());                          //.data() returns data object
                 document.getElementById("quote-goes-here").innerHTML = tuesdayDoc.data().quote;      //using javascript to display the data on the right place
